@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elia Moharer Portfolio</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="desktop" id="desktop" aria-label="Windows XP themed portfolio desktop">
+      <section class="desktop-icons" aria-label="Project shortcuts">
+        <button
+          class="desktop-icon"
+          type="button"
+          data-project="calorelia"
+          style="--icon-x: 16px; --icon-y: 18px"
+          aria-label="Open Calorelia project"
+        >
+          <span class="project-icon project-icon--calorelia desktop-icon__image" aria-hidden="true"></span>
+          <span class="desktop-icon__label">Calorelia</span>
+        </button>
+        <button
+          class="desktop-icon"
+          type="button"
+          data-project="eliai"
+          style="--icon-x: 16px; --icon-y: 112px"
+          aria-label="Open EliAI project"
+        >
+          <span class="project-icon project-icon--eliai desktop-icon__image" aria-hidden="true"></span>
+          <span class="desktop-icon__label">EliAI</span>
+        </button>
+        <button
+          class="desktop-icon"
+          type="button"
+          data-project="emlvisualizer"
+          style="--icon-x: 16px; --icon-y: 206px"
+          aria-label="Open EML Visualizer project"
+        >
+          <span class="project-icon project-icon--emlvisualizer desktop-icon__image" aria-hidden="true"></span>
+          <span class="desktop-icon__label">EML Visualizer</span>
+        </button>
+      </section>
+
+      <section class="window-layer" id="window-layer" aria-label="Open project windows"></section>
+
+      <aside class="start-menu" id="start-menu" aria-label="Start menu" aria-hidden="true">
+        <header class="start-menu__header">
+          <span class="start-menu__avatar" aria-hidden="true">
+            <span class="sprite-icon sprite-icon--user"></span>
+          </span>
+          <span class="start-menu__name">Elia Moharer</span>
+        </header>
+
+        <div class="start-menu__content">
+          <section class="start-menu__column start-menu__column--left" aria-label="Pinned projects">
+            <button class="start-menu__item start-menu__item--large" type="button" data-project="calorelia">
+              <span class="project-icon project-icon--calorelia" aria-hidden="true"></span>
+              <span>
+                <strong>Calorelia</strong>
+                <small>Calorie tracker</small>
+              </span>
+            </button>
+            <button class="start-menu__item start-menu__item--large" type="button" data-project="eliai">
+              <span class="project-icon project-icon--eliai" aria-hidden="true"></span>
+              <span>
+                <strong>EliAI</strong>
+                <small>Local iOS personal AI</small>
+              </span>
+            </button>
+            <button class="start-menu__item start-menu__item--large" type="button" data-project="emlvisualizer">
+              <span class="project-icon project-icon--emlvisualizer" aria-hidden="true"></span>
+              <span>
+                <strong>EML Visualizer</strong>
+                <small>Interactive math graph</small>
+              </span>
+            </button>
+            <div class="start-menu__separator" aria-hidden="true"></div>
+            <button class="start-menu__item" type="button" data-project="emlvisualizer">
+              <span class="sprite-icon sprite-icon--folder" aria-hidden="true"></span>
+              <span>All Projects</span>
+            </button>
+          </section>
+
+          <section class="start-menu__column start-menu__column--right" aria-label="Portfolio links">
+            <button class="start-menu__item" type="button" data-project="calorelia">
+              <span class="sprite-icon sprite-icon--documents" aria-hidden="true"></span>
+              <span>Latest Project</span>
+            </button>
+            <a
+              class="start-menu__item"
+              href="https://github.com/eliamoharer"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span class="sprite-icon sprite-icon--github" aria-hidden="true"></span>
+              <span>GitHub Profile</span>
+            </a>
+            <a
+              class="start-menu__item"
+              href="https://eliamoharer.github.io/EMLVisualizer/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span class="sprite-icon sprite-icon--network" aria-hidden="true"></span>
+              <span>Open EML Site</span>
+            </a>
+          </section>
+        </div>
+
+        <footer class="start-menu__footer">
+          <button class="system-button" type="button" data-menu-action="logoff">
+            <span class="system-button__icon system-button__icon--logoff" aria-hidden="true"></span>
+            Log Off
+          </button>
+          <button class="system-button" type="button" data-menu-action="shutdown">
+            <span class="system-button__icon system-button__icon--shutdown" aria-hidden="true"></span>
+            Turn Off Computer
+          </button>
+        </footer>
+      </aside>
+
+      <footer class="taskbar" aria-label="Windows XP taskbar">
+        <button class="start-button" id="start-button" type="button" aria-controls="start-menu" aria-expanded="false">
+          <span class="start-button__logo" aria-hidden="true"></span>
+          start
+        </button>
+        <div class="taskbar__programs" id="taskbar-programs"></div>
+        <div class="taskbar__tray" aria-label="Notification area">
+          <button class="tray-chevron" type="button" aria-label="Show hidden icons">‹</button>
+          <span class="tray-icon tray-icon--network" aria-hidden="true"></span>
+          <button class="tray-icon tray-icon--volume volume-medium" id="tray-volume" type="button" aria-label="Site sound volume: medium">
+            <span class="volume-wave volume-wave--one" aria-hidden="true"></span>
+            <span class="volume-wave volume-wave--two" aria-hidden="true"></span>
+            <span class="volume-wave volume-wave--three" aria-hidden="true"></span>
+          </button>
+          <time class="taskbar__clock" id="taskbar-clock" aria-label="Current time">--:--</time>
+        </div>
+      </footer>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
