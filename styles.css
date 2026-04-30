@@ -61,7 +61,7 @@ a {
   position: relative;
   min-height: 100vh;
   overflow: hidden;
-  background: url("bliss.png") center / cover no-repeat #3b79db;
+  background: url("bliss.avif") center / cover no-repeat #3b79db;
   user-select: none;
 }
 
