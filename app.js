@@ -45,6 +45,9 @@ const desktop = document.querySelector("#desktop");
 const desktopIcons = document.querySelectorAll(".desktop-icon");
 const startButton = document.querySelector("#start-button");
 const startMenu = document.querySelector("#start-menu");
+const shutdownDialog = document.querySelector("#shutdown-dialog");
+const shutdownConfirm = document.querySelector("[data-shutdown-confirm]");
+const shutdownCancel = document.querySelector("[data-shutdown-cancel]");
 const windowLayer = document.querySelector("#window-layer");
 const taskbarPrograms = document.querySelector("#taskbar-programs");
 const taskbarClock = document.querySelector("#taskbar-clock");
@@ -436,6 +439,28 @@ function toggleStartMenu() {
   openStartMenu();
 }
 
+function openShutdownDialog() {
+  closeStartMenu();
+  shutdownDialog.classList.add("is-open");
+  shutdownDialog.setAttribute("aria-hidden", "false");
+  shutdownCancel.focus();
+}
+
+function closeShutdownDialog() {
+  shutdownDialog.classList.remove("is-open");
+  shutdownDialog.setAttribute("aria-hidden", "true");
+}
+
+function confirmShutdown() {
+  window.close();
+
+  // Browsers only allow scripts to close tabs that were opened by script.
+  window.setTimeout(() => {
+    document.body.innerHTML = "";
+    document.body.style.background = "#000";
+  }, 150);
+}
+
 function updateClock() {
   const now = new Date();
   taskbarClock.textContent = now.toLocaleTimeString([], {
@@ -580,8 +605,24 @@ startButton.addEventListener("click", (event) => {
 startMenu.addEventListener("click", (event) => {
   event.stopPropagation();
 
-  if (event.target.closest("[data-menu-action]")) {
+  const menuAction = event.target.closest("[data-menu-action]")?.dataset.menuAction;
+
+  if (menuAction === "shutdown") {
+    openShutdownDialog();
+    return;
+  }
+
+  if (menuAction) {
     closeStartMenu();
+  }
+});
+
+shutdownConfirm.addEventListener("click", confirmShutdown);
+shutdownCancel.addEventListener("click", closeShutdownDialog);
+
+shutdownDialog.addEventListener("click", (event) => {
+  if (event.target === shutdownDialog) {
+    closeShutdownDialog();
   }
 });
 
@@ -602,12 +643,29 @@ document.addEventListener("contextmenu", (event) => {
   event.preventDefault();
 });
 
+document.addEventListener(
+  "touchmove",
+  (event) => {
+    event.preventDefault();
+  },
+  { passive: false },
+);
+
+document.addEventListener("gesturestart", (event) => {
+  event.preventDefault();
+});
+
 document.addEventListener("mousemove", dragWindow);
 document.addEventListener("mousemove", dragDesktopIcon);
 document.addEventListener("mouseup", stopWindowDrag);
 document.addEventListener("mouseup", stopIconDrag);
 
 document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && shutdownDialog.classList.contains("is-open")) {
+    closeShutdownDialog();
+    return;
+  }
+
   if (event.key === "Escape" && startMenu.classList.contains("is-open")) {
     closeStartMenu();
     return;

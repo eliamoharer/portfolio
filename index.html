@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <title>Elia Moharer Portfolio</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
@@ -108,16 +111,36 @@
         </div>
 
         <footer class="start-menu__footer">
-          <button class="system-button" type="button" data-menu-action="logoff">
-            <span class="system-button__icon system-button__icon--logoff" aria-hidden="true"></span>
-            Log Off
-          </button>
           <button class="system-button" type="button" data-menu-action="shutdown">
             <span class="system-button__icon system-button__icon--shutdown" aria-hidden="true"></span>
             Turn Off Computer
           </button>
         </footer>
       </aside>
+
+      <section
+        class="shutdown-dialog"
+        id="shutdown-dialog"
+        role="dialog"
+        aria-labelledby="shutdown-title"
+        aria-modal="true"
+        aria-hidden="true"
+      >
+        <div class="shutdown-dialog__window">
+          <header class="shutdown-dialog__titlebar">
+            <span id="shutdown-title">Turn Off Computer</span>
+          </header>
+          <div class="shutdown-dialog__body">
+            <p>Are you sure?</p>
+            <div class="shutdown-dialog__actions">
+              <button class="xp-button xp-button--primary" type="button" data-shutdown-confirm>
+                Yes
+              </button>
+              <button class="xp-button" type="button" data-shutdown-cancel>No</button>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <footer class="taskbar" aria-label="Windows XP taskbar">
         <button class="start-button" id="start-button" type="button" aria-controls="start-menu" aria-expanded="false">

@@ -35,6 +35,8 @@ body {
   width: 100%;
   height: 100%;
   margin: 0;
+  overflow: hidden;
+  overscroll-behavior: none;
 }
 
 body {
@@ -44,6 +46,8 @@ body {
   font-family: "Tahoma XP", Tahoma, "Segoe UI", Arial, sans-serif;
   font-size: 12px;
   cursor: var(--cursor-arrow);
+  -webkit-text-size-adjust: 100%;
+  touch-action: none;
 }
 
 button,
@@ -59,10 +63,14 @@ a {
 
 .desktop {
   position: relative;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
   min-height: 100vh;
   overflow: hidden;
   background: url("bliss.avif") center / cover no-repeat #3b79db;
   user-select: none;
+  touch-action: none;
 }
 
 .sprite-icon {
@@ -500,10 +508,12 @@ a {
 .project-details {
   grid-area: details;
   padding: 18px 18px 16px;
+  min-width: 0;
+  overflow: hidden;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0)),
     linear-gradient(90deg, #f7f4e7, #e6e0c8);
-  border-left: 1px solid #fff;
+  border-left: 1px solid #c7bea6;
 }
 
 .project-details__eyebrow {
@@ -747,20 +757,63 @@ a {
   border-radius: 4px;
 }
 
-.system-button__icon--logoff {
-  background: linear-gradient(135deg, #ffc36f, #e37313);
-}
-
-.system-button__icon--logoff::before {
-  content: "L";
-}
-
 .system-button__icon--shutdown {
   background: linear-gradient(135deg, #ff8b7a, #d72814);
 }
 
 .system-button__icon--shutdown::before {
   content: "O";
+}
+
+.shutdown-dialog {
+  position: absolute;
+  inset: 0 0 36px;
+  z-index: 80;
+  display: none;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.shutdown-dialog.is-open {
+  display: grid;
+}
+
+.shutdown-dialog__window {
+  width: min(320px, calc(100vw - 28px));
+  overflow: hidden;
+  background: var(--xp-cream);
+  border: 2px solid #0b55d8;
+  border-radius: 8px 8px 4px 4px;
+  box-shadow: 5px 8px 22px rgba(0, 0, 0, 0.42);
+}
+
+.shutdown-dialog__titlebar {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  padding: 3px 8px;
+  color: #fff;
+  font-weight: 700;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.55);
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.16), transparent 12%, transparent 88%, rgba(255, 255, 255, 0.12)),
+    linear-gradient(180deg, var(--xp-blue-1) 0%, var(--xp-blue-2) 45%, var(--xp-blue-4) 100%);
+}
+
+.shutdown-dialog__body {
+  padding: 22px 18px 16px;
+  text-align: center;
+}
+
+.shutdown-dialog__body p {
+  margin: 0 0 20px;
+  font-size: 14px;
+}
+
+.shutdown-dialog__actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 
 .taskbar {
@@ -1032,42 +1085,58 @@ a {
 }
 
 @media (max-width: 820px) {
+  html,
   body {
-    overflow: auto;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
   }
 
   .desktop {
-    min-height: 760px;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .window-layer {
+    inset: 0 0 36px;
   }
 
   .xp-window {
-    top: 88px;
-    left: 12px;
-    width: calc(100vw - 24px);
+    top: 0 !important;
+    right: 0;
+    bottom: 0;
+    left: 0 !important;
+    width: 100%;
+    height: 100%;
     min-width: 0;
-    max-height: none;
+    border-radius: 0;
   }
 
   .xp-window__body {
     grid-template-columns: 1fr;
+    grid-template-rows: 28px 32px minmax(0, 1fr);
     grid-template-areas:
       "toolbar"
       "address"
-      "preview"
-      "details";
+      "preview";
   }
 
   .project-preview,
   .project-preview iframe {
-    min-height: 320px;
+    min-height: 0;
   }
 
   .project-details {
-    border-left: 0;
-    border-top: 1px solid #fff;
+    display: none;
   }
 
   .start-menu {
     height: min(478px, calc(100vh - 48px));
+    height: min(478px, calc(100dvh - 48px));
   }
 }
